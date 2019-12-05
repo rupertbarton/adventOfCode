@@ -6,8 +6,6 @@ const solver = (array) => {
   for (i = 0; i < 100; i++) {
     for (j = 0; j < 100; j++) {
       testArray = [...array]
-      console.log("i", i)
-      console.log("j", j)
       testArray[1] = i
       testArray[2] = j
 
