@@ -1,4 +1,5 @@
 const data = require('./input')
+const fp = require('lodash/fp')
 
 const solver = (data) => {
   let counter = 0
@@ -10,44 +11,25 @@ const solver = (data) => {
   }
 
   const recursiveUpdateChildren = (updatedOrbitee) => {
-    if (tracker[updatedOrbitee].orbitedBy) {
-      tracker[updatedOrbitee].orbitedBy.map(childBody => {
+    fp.getOr([], 'orbitedBy')(tracker[updatedOrbitee]).map(child => {
         const newValue = tracker[updatedOrbitee].value + 1
-        if (tracker[childBody]) {
-          tracker[childBody].value = newValue
-        } else {
-          tracker[childBody] = {
-            value: newValue
-          }
-        }
+        tracker = fp.set(`[${child}].value`, newValue)(tracker)
         counter += newValue
-        recursiveUpdateChildren(childBody)
+        recursiveUpdateChildren(child)
       })
-    }
   }
 
 
   data.map((value) => {
     const [centerOfOrbit, orbiter] = value.split(')')
-    if (tracker[centerOfOrbit] && tracker[centerOfOrbit].orbitedBy) {
-      tracker[centerOfOrbit].orbitedBy.push(orbiter)
-    } else if (tracker[centerOfOrbit]) {
-      tracker[centerOfOrbit].orbitedBy = [orbiter]
-    } else {
-      tracker[centerOfOrbit] = {
-        orbitedBy: [orbiter]
-      }
-    }
+    const orbiterArray = fp.getOr([], 'orbitedBy' )(tracker[centerOfOrbit])
+    tracker = fp.set(`[${centerOfOrbit}].orbitedBy`, [...orbiterArray, orbiter])(tracker)
 
-    if (tracker[centerOfOrbit] && (tracker[centerOfOrbit].value || tracker[centerOfOrbit].value === 0) ) {
+    if (fp.getOr(-1, `[${centerOfOrbit}].value`)(tracker) >= 0) {
       const newValue = tracker[centerOfOrbit].value + 1
-      if (tracker[orbiter]) {
-        tracker[orbiter].value = tracker[centerOfOrbit].value + 1
-      } else {
-        tracker[orbiter] = {
-          value: tracker[centerOfOrbit].value + 1
-        }
-      }
+
+      tracker = fp.set(`[${orbiter}].value`, newValue)(tracker)
+
       counter += newValue
       recursiveUpdateChildren(orbiter)
     }
@@ -60,5 +42,5 @@ const solver = (data) => {
 test1 = ['COM)B', 'B)C', 'C)D', 'D)E', 'E)F', 'B)G', 'G)H', 'D)I', 'E)J', 'J)K', 'K)L']
 
 console.time()
-console.log(solver(test1))
+console.log(solver(data))
 console.timeEnd()
