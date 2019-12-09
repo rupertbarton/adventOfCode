@@ -1,0 +1,24 @@
+{
+  "name": "adventofcoding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "intComputer.js",
+  "dependencies": {
+    "jest": "^24.9.0",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupertbarton/adventOfCode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rupertbarton/adventOfCode/issues"
+  },
+  "homepage": "https://github.com/rupertbarton/adventOfCode#readme"
+}
