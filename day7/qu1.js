@@ -22,8 +22,6 @@ const solver = (array) => {
               const resultC = intCodeCompute(array, [c, resultB])
               const resultD = intCodeCompute(array, [d, resultC])
               const resultE = intCodeCompute(array, [e, resultD])
-              console.log(a,b,c,d,e)
-
               if (resultE > currentMax) {
                 currentMax = resultE
               }

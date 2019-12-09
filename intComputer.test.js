@@ -38,12 +38,12 @@ describe('IntCodeComputer', () => {
 
     it('Can handle qu1', () => {
       intCodeCompute
-      expect(intCodeCompute(inputCode, 1)).toBe(4601506);
+      expect(intCodeCompute(inputCode, [0, 5576])).toBe(27910);
     })
-
+    
     it('Can handle qu2', () => {
       intCodeCompute
-      expect(intCodeCompute(inputCode, 5)).toBe(5525561);
+      expect(intCodeCompute(inputCode, [3, 15110])).toBe(30220);
     })
   })
 })
