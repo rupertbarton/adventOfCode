@@ -2,6 +2,7 @@ const intCodeComputer = (array, input) => {
   let i = 0
   let returnValue = null
   let positionModes = ""
+  let currentInputIndex = 0
   
 const getValue = (parameter) => {
   return getInputValue(i + parameter + 1, array, positionModes[parameter])
@@ -18,7 +19,8 @@ const getValue = (parameter) => {
       array[array[i+3]] = getValue(0) * getValue(1)
       i = i + 4
     } else if (OpCode === 3) {
-      array[array[i + 1]] = input
+      array[array[i + 1]] = input[0] !== undefined ? input[currentInputIndex] : input
+      currentInputIndex++
       i = i + 2
     } else if (OpCode === 4) {
       returnValue = getValue(0)
