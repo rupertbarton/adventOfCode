@@ -1,4 +1,4 @@
-with open("input") as file:
+with open("input.txt") as file:
     lines = file.read().splitlines()
     
     max_c = 0

@@ -6,7 +6,7 @@ def get_lowest(l):
         
     
 
-with open("input") as file:
+with open("input.txt") as file:
     lines = file.read().splitlines()
     
     max_cs = [0,0,0]
@@ -21,5 +21,4 @@ with open("input") as file:
             if current > max_cs[get_lowest(max_cs)]: max_cs[get_lowest(max_cs)] = current
             current = 0
         
-    
     print(sum(max_cs[:3]))
